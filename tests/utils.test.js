@@ -25,6 +25,21 @@ it("should say hello", function() {
 // 4. Finally see if you would like to refactor your code at all.
 // This is called "Red-Green-Refactor"
 // ========================================================
+it("should return the area of a 5 by 6 rectangle", function() {
+  const area = utils.area(5, 6)
+  expect(area).to.be.a("number")
+  expect(area).to.be.equal(30)
+})
+
+it("should return the perimeter of a 5 by 6 rectangle", function() {
+  const perimeter = utils.perimeter(5, 6)
+  expect(perimeter).to.be.equal(22)
+})
+
+it("should return the area of a circle of radius 5", function() {
+  const area = utils.circleArea(5)
+  expect(area).to.be.equal(78.53981633974483)
+})
 
 
 
@@ -37,10 +52,10 @@ it("should say hello", function() {
 // tests eventually.
 // ========================================================
 
-beforeEach((done) => {
-  utils.clearCart()
-  done()
-})
+// beforeEach((done) => {
+//   utils.clearCart()
+//   done()
+// })
 
 it("Should create a new (object) Item with name and price", function() {
   const item = utils.createItem("apple", 0.99)
@@ -50,13 +65,40 @@ it("Should create a new (object) Item with name and price", function() {
   expect(item).to.have.property("quantity", 1)
 })
 
-it("Should return an array containing all items in cart")
 
-it("Should add a new item to the shopping cart")
 
-it("Should return the number of items in the cart")
 
-it("Should remove items from cart")
+it("Should return an array containing all items in cart", function() {
+  const cart_len = utils.getNumItemsInCart()
+  expect(cart_len).to.equal(0)
+  const item = utils.createItem("apple", 0.99)
+  const n_item = utils.addItemToCart(item)
+  const cart = utils.getShoppingCart()
+  expect(cart).to.be.a("string")
+  expect(cart).to.equal('apple ')
+})
+
+it("Should add a new item to the shopping cart", function() {
+  const item = utils.createItem("apple", 0.99)
+  const n_item = utils.addItemToCart(item)
+  const cart_len = utils.getNumItemsInCart()
+  expect(cart_len).to.equal(2)
+})
+
+it("Should return the number of items in the cart", function(){
+  const item = utils.createItem("apple", 0.99)
+  const n_item = utils.addItemToCart(item)
+  const cart_len = utils.getNumItemsInCart()
+  expect(cart_len).to.equal(3)
+})
+
+it("Should remove items from cart", function() {
+  const item = utils.createItem("apple", 0.99)
+  const n_item = utils.addItemToCart(item)
+  const u_item = utils.removeItemFromCart(item)
+  const cart_len = utils.getNumItemsInCart()
+  expect(cart_len).to.equal(3)
+})
 
 // ========================================================
 // Stretch Challenges
